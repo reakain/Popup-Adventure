@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" name="LogicFlow" qt:editorversion="4.15.0" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" initial="State_1">
+    <qt:editorinfo initialGeometry="133.76;348.18;-20;-20;40;40"/>
+    <state id="State_1">
+        <qt:editorinfo geometry="86.79;195.03;-60;-50;120;100" scenegeometry="86.79;195.03;26.79;145.03;120;100"/>
+        <transition type="external" event="Transition_3" target="State_2"/>
+        <transition type="external" event="Transition_4" target="State_3"/>
+        <transition type="external" event="Transition_5" target="Final_1"/>
+    </state>
+    <state id="State_2">
+        <qt:editorinfo geometry="424.77;72.50;-60;-50;120;100" scenegeometry="424.77;72.50;364.77;22.50;120;100"/>
+        <transition type="external" event="Transition_8" target="Final_1"/>
+    </state>
+    <state id="State_3">
+        <qt:editorinfo geometry="322.66;222.59;-60;-50;120;100" scenegeometry="322.66;222.59;262.66;172.59;120;100"/>
+        <transition type="external" event="Transition_6" target="Final_1"/>
+    </state>
+    <final id="Final_1">
+        <qt:editorinfo geometry="497.26;335.93;-20;-20;40;40" scenegeometry="497.26;335.93;477.26;315.93;40;40"/>
+    </final>
+</scxml>

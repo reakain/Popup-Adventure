@@ -1,0 +1,32 @@
+{
+    "player": {
+        "name": "bleh",
+        "level": "bleh",
+        "classType": 0
+    },
+    "levels": [
+    {
+        "name": "Start",
+        "title": "Welcome to the adventure!",
+        "body": "Do you want to start a new game?",
+        "choices": [
+        {
+            "goto": "beginning",
+            "type": "QMessageBox::Yes"
+        }
+        ]
+    },
+    {
+        "name": "bleh",
+        "title": "bleh",
+        "body": "bleh",
+        "icon": 0,
+        "choices": [
+        {
+            "goto": "bleh",
+            "type": 0
+        }
+        ]
+    }
+    ]
+}
