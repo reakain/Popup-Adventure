@@ -13,6 +13,8 @@ Correct answer: We're using QT to generate the popups, based on the narrative st
  - Fix the hang on exit problem
  - Write the actual story, I guess lolol. Might write it in yarn and then port it to our json.
  - Edit make instructions to actually copy ```story.json``` to the output directory.
+ - Figure out how to make the popup box titles have the title text properly
+ - Double check the icon choices
 
 
 ## References
