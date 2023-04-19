@@ -6,13 +6,17 @@
     },
     "levels": [
     {
-        "name": "Start",
-        "title": "Welcome to the adventure!",
-        "body": "Do you want to start a new game?",
+        "name": "Start0",
+        "title": "Beginnings",
+        "body": "You awake in a house",
         "choices": [
         {
             "goto": "beginning",
-            "type": "QMessageBox::Yes"
+            "type": "Yes"
+        },
+        {
+            "goto": "beginning",
+            "type": "No"
         }
         ]
     },
@@ -24,7 +28,7 @@
         "choices": [
         {
             "goto": "bleh",
-            "type": 0
+            "type": "Ok"
         }
         ]
     }
