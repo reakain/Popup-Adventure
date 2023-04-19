@@ -31,6 +31,13 @@
             "type": "Ok"
         }
         ]
+    },
+    {
+        "name": "Credits",
+        "title": "Credits",
+        "body": "Made by Reakain",
+        "icon": 3,
+        "choices": []
     }
     ]
 }

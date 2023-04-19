@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include "level.h"
+#include "game.h"
 
 class PopUpWindow : public QMainWindow
 {
@@ -11,6 +13,11 @@ public:
     explicit PopUpWindow(QWidget *parent = nullptr);
 
 signals:
+
+private:
+    Level mLastLevel;
+    Level mCurrentLevel;
+    Game mGameData;
 
 };
 
