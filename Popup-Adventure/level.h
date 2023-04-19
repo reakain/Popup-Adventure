@@ -33,6 +33,8 @@ public:
     QList<Choice> choices() const;
     void setChoices(const QList<Choice> &choices);
 
+    bool getChoiceOfType(QMessageBox::StandardButton btnType, Choice &choice);
+
     // Reading from json
     void read(const QJsonObject &json);
     void write(QJsonObject &json) const;

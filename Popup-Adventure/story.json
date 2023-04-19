@@ -8,7 +8,7 @@
     {
         "name": "Start0",
         "title": "Beginnings",
-        "body": "You awake in a house",
+        "body": "",
         "choices": [
         {
             "goto": "beginning",

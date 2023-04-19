@@ -27,9 +27,33 @@ QList<Choice> Level::choices() const
     return mChoices;
 }
 
+QMessageBox::Icon Level::icon() const
+{
+    return mIcon;
+}
+
+//QMessageBox::StandardButtons Level::btnChoices()
+//{
+//    QList<QMessageBox::StandardButton>
+//}
+
 void Level::setChoices(const QList<Choice> &choices)
 {
     mChoices = choices;
+}
+
+bool Level::getChoiceOfType(QMessageBox::StandardButton btnType, Choice &choice)
+{
+    if (!mChoices.isEmpty())
+    {    for(int i =0; i < mChoices.length(); i++)
+    {
+        if (mChoices[i].button() == btnType)
+        {
+            choice =  mChoices[i];
+            return true;
+        }
+    }}
+    return false;
 }
 
 //! [0]

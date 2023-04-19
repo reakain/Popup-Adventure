@@ -32,6 +32,7 @@ public:
     void print(int indentation = 0) const;
 private:
     Player mPlayer;
+    Level mCurrentLevel;
     QList<Level> mLevels;
 };
 

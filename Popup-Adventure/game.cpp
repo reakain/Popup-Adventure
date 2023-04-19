@@ -8,6 +8,7 @@
 #include <QRandomGenerator>
 #include <QTextStream>
 
+
 Player Game::player() const
 {
     return mPlayer;
@@ -63,8 +64,8 @@ void Game::newGame()
 bool Game::loadGame(Game::SaveFormat saveFormat)
 {
     QFile loadFile(saveFormat == Json
-        ? QStringLiteral("save.json")
-        : QStringLiteral("save.dat"));
+        ? QStringLiteral("story.json")
+        : QStringLiteral("story.dat"));
 
     if (!loadFile.open(QIODevice::ReadOnly)) {
         qWarning("Couldn't open save file.");
