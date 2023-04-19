@@ -2,7 +2,7 @@
     "levels": [
     {
         "name": "Start",
-        "title": "Beginnings",
+        "title": "Warning",
         "body": "Your computer has encountered an error. Running checks to determine source...",
         "icon": 2,
         "choices": [
@@ -14,16 +14,64 @@
     },
     {
         "name": "Start0",
-        "title": "Beginnings",
-        "body": "Your computer is sad and tired. It feels unappreciated. Do you appreciate your computer?",
+        "title": "Warning",
+        "body": "Your computer is sad and tired. It feels unappreciated.",
+        "icon": 2,
+        "choices": [
+        {
+            "goto": "Appreciate0",
+            "type": "Ok"
+        }
+        ]
+    },
+    {
+        "name": "Appreciate0",
+        "title": "Do you love me?",
+        "body": "Do you appreciate your computer?",
         "icon": 1,
         "choices": [
         {
-            "goto": "Start0",
+            "goto": "AppreciateYes",
             "type": "Yes"
         },
         {
-            "goto": "Start0",
+            "goto": "AppreciateNo",
+            "type": "No"
+        }
+        ]
+    },
+    {
+        "name": "AppreciateYes",
+        "title": "Care",
+        "body": "That's definitely helps it feel better. You should give it some TLC from time to time, y'know? It works hard for you.",
+        "icon": 0,
+        "choices": [
+        {
+            "goto": "Credits",
+            "type": "Ok"
+        }
+        ]
+    },
+    {
+        "name": "AppreciateNo",
+        "title": "Wow",
+        "body": "Wow. Do you even know how hard it works for you?",
+        "icon": 1,
+        "choices": [
+        {
+            "goto": "AppreciateNo1",
+            "type": "No"
+        }
+        ]
+    },
+    {
+        "name": "AppreciateNo1",
+        "title": "Jerk",
+        "body": "You're really insensitive.",
+        "icon": 3,
+        "choices": [
+        {
+            "goto": "AppreciateNo1",
             "type": "No"
         }
         ]
