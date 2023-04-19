@@ -12,12 +12,12 @@
 <context>
     <name>PopUpWindow</name>
     <message>
-        <location filename="popupwindow.cpp" line="127"/>
+        <location filename="popupwindow.cpp" line="207"/>
         <source>About Popup Adventure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="popupwindow.cpp" line="127"/>
+        <location filename="popupwindow.cpp" line="207"/>
         <source>Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!</source>
         <translation type="unfinished"></translation>
     </message>

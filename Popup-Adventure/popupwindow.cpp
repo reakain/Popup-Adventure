@@ -6,10 +6,28 @@ PopUpWindow::PopUpWindow(QWidget *parent) : QMainWindow(parent)
      * Let's first see if there's save data to load, and load out whole ass logic tree script
      *
      */
-    mGameData.loadGame(Game::SaveFormat::Json);
+    // Let's load up our actual narrative
+    if(!mGameData.loadStory("story.json")) {
+        // Quit game
+    }
+
+
+    // Then let's load our save data
+    if(mSaveData.loadGame(Game::SaveFormat::Json))
+    {
+        // Then we had save data, so let's offer to continue
+
+    }
+    else
+    {
+        // Otherwise let's just start a new game
+        mGameData.getLevelWithName("Start", mCurrentLevel);
+        OpenCurrentLevel();
+    }
 
 
     //mGameData.read("")
+    /*
     QMessageBox msgBox;
     msgBox.setText("Welcome to the adventure!");
     msgBox.setInformativeText("Do you want to start a new game?");
@@ -36,6 +54,7 @@ PopUpWindow::PopUpWindow(QWidget *parent) : QMainWindow(parent)
         OpenHelp();
         break;
     }
+    */
 }
 
 void PopUpWindow::OpenCurrentLevel()
@@ -65,52 +84,100 @@ void PopUpWindow::OpenCurrentLevel()
     switch(ret)
     {
     case QMessageBox::Yes:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Yes, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Yes, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::No:
-        mCurrentLevel.getChoiceOfType(QMessageBox::No, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::No, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Cancel:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Cancel, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Cancel, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Ok:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Ok, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Ok, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::YesToAll:
-        mCurrentLevel.getChoiceOfType(QMessageBox::YesToAll, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::YesToAll, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::NoToAll:
-        mCurrentLevel.getChoiceOfType(QMessageBox::NoToAll, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::NoToAll, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Abort:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Abort, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Abort, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Open:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Open, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Open, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Save:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Save, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Save, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Apply:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Apply, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Apply, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Reset:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Reset, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Reset, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Retry:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Retry, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Retry, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Ignore:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Ignore, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Ignore, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Discard:
-        mCurrentLevel.getChoiceOfType(QMessageBox::Discard, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::Discard, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::SaveAll:
-        mCurrentLevel.getChoiceOfType(QMessageBox::SaveAll, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::SaveAll, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::RestoreDefaults:
-        mCurrentLevel.getChoiceOfType(QMessageBox::RestoreDefaults, pickedChoice);
+        if(mCurrentLevel.getChoiceOfType(QMessageBox::RestoreDefaults, pickedChoice))
+        {
+            UpdateLevel(pickedChoice.goToName());
+        }
         break;
     case QMessageBox::Close:
         CloseSave();
@@ -119,6 +186,19 @@ void PopUpWindow::OpenCurrentLevel()
         // Popup info about the application
         OpenHelp();
         break;
+    }
+}
+
+void PopUpWindow::UpdateLevel(QString goToName)
+{
+    mLastLevel = mCurrentLevel;
+    if(mGameData.getLevelWithName(goToName,mCurrentLevel))
+    {
+        OpenCurrentLevel();
+    }
+    else
+    {
+        // Failed to find level with name. Suffer
     }
 }
 
@@ -131,7 +211,7 @@ void PopUpWindow::OpenHelp()
 
 void PopUpWindow::CloseSave()
 {
-    mGameData.saveGame(Game::SaveFormat::Json);
+   // mSaveData.saveGame(Game::SaveFormat::Json);
     this->close();
 }
 

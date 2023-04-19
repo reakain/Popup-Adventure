@@ -64,8 +64,8 @@ void Game::newGame()
 bool Game::loadGame(Game::SaveFormat saveFormat)
 {
     QFile loadFile(saveFormat == Json
-        ? QStringLiteral("story.json")
-        : QStringLiteral("story.dat"));
+        ? QStringLiteral("save.json")
+        : QStringLiteral("save.dat"));
 
     if (!loadFile.open(QIODevice::ReadOnly)) {
         qWarning("Couldn't open save file.");

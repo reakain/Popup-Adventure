@@ -1,21 +1,29 @@
 {
-    "player": {
-        "name": "bleh",
-        "level": "bleh",
-        "classType": 0
-    },
     "levels": [
+    {
+        "name": "Start",
+        "title": "Beginnings",
+        "body": "Your computer has encountered an error. Running checks to determine source...",
+        "icon": 2,
+        "choices": [
+        {
+            "goto": "Start0",
+            "type": "Ok"
+        }
+        ]
+    },
     {
         "name": "Start0",
         "title": "Beginnings",
-        "body": "",
+        "body": "Your computer is sad and tired. It feels unappreciated. Do you appreciate your computer?",
+        "icon": 1,
         "choices": [
         {
-            "goto": "beginning",
+            "goto": "Start0",
             "type": "Yes"
         },
         {
-            "goto": "beginning",
+            "goto": "Start0",
             "type": "No"
         }
         ]

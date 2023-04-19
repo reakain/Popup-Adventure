@@ -42,6 +42,7 @@ set(PROJECT_SOURCES
         story.json
         game.h game.cpp
         player.h player.cpp
+        story.h story.cpp
         ${TS_FILES}
 )
 
