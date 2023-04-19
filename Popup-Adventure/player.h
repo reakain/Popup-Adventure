@@ -6,6 +6,10 @@
 #include <QObject>
 #include <QString>
 
+/*
+ * Our player character data. This currently does nothing lol
+ */
+
 //! [0]
 class Player
 {

@@ -8,6 +8,10 @@
 #include <QJsonObject>
 #include <QList>
 
+/*
+ * Our game data class. Currently doesn't do a whole lot
+ */
+
 class Game
 {
 public:

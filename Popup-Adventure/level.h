@@ -6,6 +6,9 @@
 #include <QList>
 #include <QMessageBox>
 
+/*
+ * Class for defining what each pop up box displays. Reads data from json
+ */
 
 class Level
 {
@@ -26,9 +29,11 @@ public:
     */
     QMessageBox::Icon icon() const;
 
+    // The list of button response options
     QList<Choice> choices() const;
     void setChoices(const QList<Choice> &choices);
 
+    // Reading from json
     void read(const QJsonObject &json);
     void write(QJsonObject &json) const;
 

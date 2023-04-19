@@ -4,6 +4,11 @@
 #include <QMetaEnum>
 #include <QJsonObject>
 
+/*
+ * Class for defining what an individual pop up window button does.
+ */
+
+
 class Choice
 {
 public:
@@ -21,8 +26,7 @@ public:
     // If not defined, defaults to Ok button
     QMessageBox::StandardButton button() const;
 
-    //void setNpcs(const QList<Character> &npcs);
-
+    // These are used to read from our json story file
     void read(const QJsonObject &json);
     void write(QJsonObject &json) const;
 
