@@ -39,12 +39,13 @@ set(PROJECT_SOURCES
         LogicFlow.scxml
         level.h level.cpp
         choice.h choice.cpp
-        story.json
         game.h game.cpp
         player.h player.cpp
         story.h story.cpp
         ${TS_FILES}
 )
+
+configure_file(story.json ${CMAKE_BINARY_DIR} COPYONLY)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Popup-Adventure
