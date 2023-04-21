@@ -1,4 +1,3 @@
-#include "mainwindow.h"
 #include "popupwindow.h"
 
 #include <QApplication>
@@ -19,8 +18,6 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    //MainWindow w;
-    //w.show();
     PopUpWindow w;
     //w.show();
     /* If we just handle levels here instead...

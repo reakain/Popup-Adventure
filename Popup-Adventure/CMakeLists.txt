@@ -31,12 +31,8 @@ set(TS_FILES Popup-Adventure_en_US.ts)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
         popupwindow.h
         popupwindow.cpp
-        LogicFlow.scxml
         level.h level.cpp
         choice.h choice.cpp
         game.h game.cpp
