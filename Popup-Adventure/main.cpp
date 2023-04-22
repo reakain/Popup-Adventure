@@ -19,12 +19,12 @@ int main(int argc, char *argv[])
         }
     }
     PopUpWindow w;
-    //w.show();
+    w.show();
     /* If we just handle levels here instead...
      * String currentLevel = "Start";
      *
      */
 
-    return a.exec();
-    //return 0;
+    //return a.exec();
+    return 0;
 }

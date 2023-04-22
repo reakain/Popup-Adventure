@@ -14,6 +14,7 @@ class Choice
 public:
     Choice() = default;
     explicit Choice(const QString &goToName);
+    explicit Choice(const QString &goToName, const QMessageBox::StandardButton &button);
 
     /* Required, as it defines the level name to move to for the text
      * We do have some special characters though:

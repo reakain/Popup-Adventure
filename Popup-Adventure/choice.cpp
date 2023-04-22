@@ -5,6 +5,11 @@ Choice::Choice(const QString &goToName) : mGoToName(goToName)
     mButton = QMessageBox::Ok;
 }
 
+Choice::Choice(const QString &goToName, const QMessageBox::StandardButton &button) : mGoToName(goToName), mButton(button)
+{
+    
+}
+
 QString Choice::goToName() const
 {
     return mGoToName;

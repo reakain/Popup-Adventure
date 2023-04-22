@@ -1,5 +1,35 @@
 {
     "levels": [
+        {
+            "name": "Title",
+            "title": "Pop Up Adventure!",
+            "body": "An exciting story told through system popup messages!",
+            "icon": 3,
+            "choices": [
+            {
+                "goto": "NewGame",
+                "type": "Ok"
+            }
+            ]
+        },
+        {
+            "name": "NewGame",
+            "title": "Would you like to start a new game?",
+            "body": "",
+            "icon": 1,
+            "choices": [
+            {
+                "goto": "Start",
+                "type": "Yes"
+            }
+            ]
+        },
+        {
+            "name": "Help",
+            "title": "Heeeelp",
+            "body": "",
+            "icon": 1
+        },
     {
         "name": "Start",
         "title": "Warning",
@@ -91,7 +121,27 @@
     {
         "name": "Credits",
         "title": "Credits",
-        "body": "Made by Reakain",
+        "body": "Made by Reakain, with help from Blink The Things.",
+        "icon": 1,
+        "choices": [
+            {"goto": "Credits1",
+        "type": "Ok"}
+        ]
+    },
+    {
+        "name": "Credits1",
+        "title": "Credits",
+        "body": "Made with Qt! Source code available at https://github.com/reakain/Popup-Adventure.",
+        "icon": 2,
+        "choices": [
+            {"goto": "Credits2",
+        "type": "Ok"}
+        ]
+    },
+    {
+        "name": "Credits2",
+        "title": "Credits",
+        "body": "Thank you for playing!",
         "icon": 3,
         "choices": []
     }

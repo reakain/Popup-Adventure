@@ -10,14 +10,54 @@ Correct answer: We're using QT to generate the popups, based on the narrative st
 ## CMake changes to copy files to output directory
 Loosely based on [this](https://stackoverflow.com/questions/34799916/copy-file-from-source-directory-to-binary-directory-using-cmake) and implemented by [BlinkTheThings](https://github.com/BlinkTheThings). Removed the ```story.json``` file from the source files, and added commanded ```configure_file(story.json ${CMAKE_BINARY_DIR} COPYONLY)``` 
 
+
+## Narrative Json Structure
+The json is a list of "level" items, which denote each popup. The "name" item is used as a reference for button linking, with certain names being expected to be present. 
+
+### Special Level Names
+The list of special level names and the associated functionality is shown below.
+
+ - Title ---- Your story title screen! It can link to as many other things as you want, but you need to link to newGame eventually to get save functionality
+ - NewGame ------ Provides the information for starting a new game and what the starting level of the narrative is in the "yes" button. If there is existing save data it will add a no button that links to the current level in the saved data.
+ - Help ------ Provides the text that's shown when a user pressed the Help button
+
+The "title" and "body" denote the text shown in the popup. The "icon" field is optional, and will default to no icon if not provided. The icon is a numeric value associated with the underlying enum defined [here](https://doc.qt.io/qt-6/qmessagebox.html#Icon-enum). And in the list below for local reference:
+
+ 0. No icon
+ 1. Information
+ 2. Warning
+ 3. Critical
+ 4. Question
+
+The "choices" item is a list of buttons to display in the textbox, and where they link to. The "goto" item is the name of the level to jump to, and the "type" is which standard button to display. These correspond to the button options [here](https://doc.qt.io/qt-6/qmessagebox.html#StandardButton-enum) and use just the constant name text without the starting "QMessageBox::". The list and any associated special qualities is shown below for local reference:
+
+ - Ok
+ - Open
+ - Save
+ - Cancel
+ - Close
+ - Discard
+ - Apply
+ - Reset
+ - RestoreDefaults
+ - Help ----> Always available. Displays information displayed in the level named "Help"
+ - SaveAll
+ - Yes
+ - YesToAll
+ - No
+ - NoToAll
+ - Abort
+ - Retry
+ - Ignore
+ - NoButton
+
 ## ToDo:
- - Save game functionality
- - Handle starting a new game/continuing an old game properly
- - Fix the hang on exit problem
  - Write the actual story, I guess lolol. Might write it in yarn and then port it to our json.
  - Figure out how to make the popup box titles have the title text properly
- - Double check the icon choices
  - Maybe remove the close button use and just use the top right x instead
+ - Some sort of visual story builder tool or conversion system from twine
+
+
 
 
 ## References

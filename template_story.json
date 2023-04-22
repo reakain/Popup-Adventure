@@ -1,0 +1,46 @@
+{
+    "levels": [
+        {
+            "name": "Title",
+            "title": "Title",
+            "body": "Blep",
+            "icon": 3,
+            "choices": [
+            {
+                "goto": "NewGame",
+                "type": "Ok"
+            }
+            ]
+        },
+        {
+            "name": "NewGame",
+            "title": "Would you like to start a new game?",
+            "body": "",
+            "icon": 1,
+            "choices": [
+            {
+                "goto": "Start",
+                "type": "Yes"
+            }
+            ]
+        },
+        {
+            "name": "Help",
+            "title": "Heeeelp",
+            "body": "",
+            "icon": 1
+        },
+    {
+        "name": "Start",
+        "title": "Warning",
+        "body": "Your computer has encountered an error. Running checks to determine source...",
+        "icon": 2,
+        "choices": [
+        {
+            "goto": "blep",
+            "type": "Ok"
+        }
+        ]
+    }
+]
+}

@@ -21,6 +21,9 @@ public:
 
     Player player() const;
     QList<Level> levels() const;
+    Level currentLevel() const;
+
+    void setLevel(Level current);
 
     void newGame();
     bool loadGame(SaveFormat saveFormat);

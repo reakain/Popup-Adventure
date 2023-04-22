@@ -9,52 +9,64 @@ PopUpWindow::PopUpWindow(QWidget *parent) : QMainWindow(parent)
     // Let's load up our actual narrative
     if(!mGameData.loadStory("story.json")) {
         // Quit game
+        this->close();
     }
+    mGameData.getLevelWithName("Help", mHelp);
 
+    //mGameData.getLevelWithName("Title", mCurrentLevel);
+    //OpenCurrentLevel();
 
-    // Then let's load our save data
-    if(mSaveData.loadGame(Game::SaveFormat::Json))
+}
+
+void PopUpWindow::show()
+{
+    mGameData.getLevelWithName("Title", mCurrentLevel);
+    OpenCurrentLevel();
+}
+
+QMessageBox::StandardButtons PopUpWindow::CheckSpecialCaseButtons()
+{
+    
+    if(mCurrentLevel.name() == "NewGame")
     {
-        // Then we had save data, so let's offer to continue
-
+        // Then let's load our save data
+        if(mSaveData.loadGame(Game::SaveFormat::Json))
+        {
+            // Then we had save data, so let's offer to continue
+            //mGameData.getLevelWithName()
+            QList<Choice> choices = mCurrentLevel.choices();
+            //choices.add(Choice("Start", QMessageBox::Yes));
+            choices.append(Choice(mSaveData.currentLevel().name(), QMessageBox::No));
+            mCurrentLevel.setChoices(choices);
+            return QMessageBox::Yes | QMessageBox::No | QMessageBox::Close | QMessageBox::Help;
+        }
+        else
+        {
+            // Otherwise let's just start a new game
+            //mGameData.getLevelWithName("Start", mCurrentLevel);
+            //OpenCurrentLevel();
+            return QMessageBox::Yes | QMessageBox::Close | QMessageBox::Help;
+        }
     }
     else
     {
-        // Otherwise let's just start a new game
-        mGameData.getLevelWithName("Start", mCurrentLevel);
-        OpenCurrentLevel();
+        QList<Choice> choices = mCurrentLevel.choices();
+        if(choices.length() < 1)
+            return QMessageBox::Close | QMessageBox::Help;
+        else
+        {
+            QMessageBox::StandardButtons choiceSet = choices[0].button();
+            if(choices.length() > 1)
+            {
+                for(int i = 1; i < choices.length(); i++)
+                {
+                    choiceSet = choiceSet | choices[i].button();
+                }
+            }
+            choiceSet = choiceSet | QMessageBox::Close | QMessageBox::Help;
+            return choiceSet;
+        }
     }
-
-
-    //mGameData.read("")
-    /*
-    QMessageBox msgBox;
-    msgBox.setText("Welcome to the adventure!");
-    msgBox.setInformativeText("Do you want to start a new game?");
-    // If they don't have save data, the no option shouldn't be present
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Close | QMessageBox::Help);
-    // If we have save data, the default should be no
-    msgBox.setDefaultButton(QMessageBox::Yes);
-    int ret = msgBox.exec();
-    switch (ret) {
-    case QMessageBox::Yes:
-        // Start a new game
-        break;
-    case QMessageBox::No:
-        // Ask if they want to continue a game
-        break;
-    case QMessageBox::Close:
-        // Exit the application
-        //QApplication::exit();
-        //this->close();
-        break;
-    case QMessageBox::Help:
-        // Popup info about the application
-        //int ret = QMessageBox::information(this, tr("About Popup Adventure"), tr("Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!"), QMessageBox::Ok);
-        OpenHelp();
-        break;
-    }
-    */
 }
 
 void PopUpWindow::OpenCurrentLevel()
@@ -63,6 +75,9 @@ void PopUpWindow::OpenCurrentLevel()
     msgBox.setText(mCurrentLevel.titleText());
     msgBox.setInformativeText(mCurrentLevel.bodyText());
     msgBox.setIcon(mCurrentLevel.icon());
+    msgBox.setStandardButtons(CheckSpecialCaseButtons());
+
+    /*
     QList<Choice> choices = mCurrentLevel.choices();
     if(choices.length() < 1)
         msgBox.setStandardButtons(QMessageBox::Close | QMessageBox::Help);
@@ -79,6 +94,7 @@ void PopUpWindow::OpenCurrentLevel()
         choiceSet = choiceSet | QMessageBox::Close | QMessageBox::Help;
         msgBox.setStandardButtons(choiceSet);
     }
+    */
     int ret = msgBox.exec();
     Choice pickedChoice;
     switch(ret)
@@ -204,14 +220,21 @@ void PopUpWindow::UpdateLevel(QString goToName)
 
 void PopUpWindow::OpenHelp()
 {
-    QMessageBox::information(this, tr("About Popup Adventure"), tr("Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!"), QMessageBox::Ok);
+    QMessageBox msgBox;
+    msgBox.setText(mHelp.titleText());
+    msgBox.setInformativeText(mHelp.bodyText());
+    msgBox.setIcon(mHelp.icon());
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+    //QMessageBox::information(this, tr("About Popup Adventure"), tr("Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!"), QMessageBox::Ok);
     // Return to current level
     OpenCurrentLevel();
 }
 
 void PopUpWindow::CloseSave()
 {
-   // mSaveData.saveGame(Game::SaveFormat::Json);
+    mSaveData.setLevel(mCurrentLevel);
+    mSaveData.saveGame(Game::SaveFormat::Json);
     this->close();
 }
 

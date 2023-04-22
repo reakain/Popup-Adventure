@@ -19,6 +19,16 @@ QList<Level> Game::levels() const
     return mLevels;
 }
 
+Level Game::currentLevel() const
+{
+    return mCurrentLevel;
+}
+
+void Game::setLevel(Level current)
+{
+    mCurrentLevel = current;
+}
+
 //! [0]
 void Game::newGame()
 {
@@ -27,8 +37,8 @@ void Game::newGame()
     mPlayer.setClassType(Player::Archer);
     mPlayer.setLevel(QRandomGenerator::global()->bounded(15, 21));
 
-    mLevels.clear();
-    mLevels.reserve(2);
+    //mLevels.clear();
+    //mLevels.reserve(2);
 /*
     Level village(QStringLiteral("Village"));
     QList<Character> villageNpcs;
@@ -116,6 +126,10 @@ void Game::read(const QJsonObject &json)
     if (json.contains("player") && json["player"].isObject())
         mPlayer.read(json["player"].toObject());
 
+    if (json.contains("current_level") && json["current_level"].isObject())
+        mCurrentLevel.read(json["current_level"].toObject());
+
+    /*
     if (json.contains("levels") && json["levels"].isArray()) {
         QJsonArray levelArray = json["levels"].toArray();
         mLevels.clear();
@@ -127,6 +141,7 @@ void Game::read(const QJsonObject &json)
             mLevels.append(level);
         }
     }
+    */
 }
 //! [1]
 
@@ -137,6 +152,11 @@ void Game::write(QJsonObject &json) const
     mPlayer.write(playerObject);
     json["player"] = playerObject;
 
+    QJsonObject currentLevelObject;
+    mCurrentLevel.write(currentLevelObject);
+    json["current_level"] = currentLevelObject;
+
+    /*
     QJsonArray levelArray;
     for (const Level &level : mLevels) {
         QJsonObject levelObject;
@@ -144,6 +164,7 @@ void Game::write(QJsonObject &json) const
         levelArray.append(levelObject);
     }
     json["levels"] = levelArray;
+*/
 }
 //! [2]
 
@@ -153,7 +174,10 @@ void Game::print(int indentation) const
     QTextStream(stdout) << indent << "Player\n";
     mPlayer.print(indentation + 1);
 
-    QTextStream(stdout) << indent << "Levels\n";
-    for (const Level &level : mLevels)
-        level.print(indentation + 1);
+    QTextStream(stdout) << indent << "Current Level\n";
+    mCurrentLevel.print(indentation + 1);
+
+    //QTextStream(stdout) << indent << "Levels\n";
+    //for (const Level &level : mLevels)
+    //    level.print(indentation + 1);
 }

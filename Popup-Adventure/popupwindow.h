@@ -18,12 +18,15 @@ public:
     void UpdateLevel(QString goToName);
     void OpenHelp();
     void CloseSave();
+    void show();
+    QMessageBox::StandardButtons CheckSpecialCaseButtons();
 
-signals:
+//signals:
 
 private:
     Level mLastLevel;
     Level mCurrentLevel;
+    Level mHelp;
     Game mSaveData;
     Story mGameData;
 
