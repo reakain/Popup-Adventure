@@ -14,8 +14,8 @@
         },
         {
             "name": "NewGame",
-            "title": "Would you like to start a new game?",
-            "body": "",
+            "title": "New Game or Continue",
+            "body": "Would you like to start a new game?",
             "icon": 1,
             "choices": [
             {
@@ -26,8 +26,8 @@
         },
         {
             "name": "Help",
-            "title": "Heeeelp",
-            "body": "",
+            "title": "About Pop Up Adventure",
+            "body": "Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!",
             "icon": 1
         },
     {

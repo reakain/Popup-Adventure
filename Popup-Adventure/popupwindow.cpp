@@ -72,10 +72,17 @@ QMessageBox::StandardButtons PopUpWindow::CheckSpecialCaseButtons()
 void PopUpWindow::OpenCurrentLevel()
 {
     QMessageBox msgBox;
-    msgBox.setText(mCurrentLevel.titleText());
-    msgBox.setInformativeText(mCurrentLevel.bodyText());
+    msgBox.setWindowTitle(mCurrentLevel.titleText());
+    msgBox.setText(mCurrentLevel.bodyText());
     msgBox.setIcon(mCurrentLevel.icon());
     msgBox.setStandardButtons(CheckSpecialCaseButtons());
+    // Qt auto links the esc/x button to the appropriate reject mode button like close or cancel
+    // If we don't provide a close/cancel button, then the x is disabled >.>
+    // We tried to just hide our close button, but Qt no longer likes that, for some reason
+    QAbstractButton *pCloseBtn = msgBox.button(QMessageBox::Close);
+    //pCloseBtn->hide();
+    //QPushButton *pCloseBtn = msgBox.addButton(QMessageBox::Close);
+    //pCloseBtn->setVisible(false);
 
     /*
     QList<Choice> choices = mCurrentLevel.choices();
@@ -221,8 +228,8 @@ void PopUpWindow::UpdateLevel(QString goToName)
 void PopUpWindow::OpenHelp()
 {
     QMessageBox msgBox;
-    msgBox.setText(mHelp.titleText());
-    msgBox.setInformativeText(mHelp.bodyText());
+    msgBox.setWindowTitle(mHelp.titleText());
+    msgBox.setText(mHelp.bodyText());
     msgBox.setIcon(mHelp.icon());
     msgBox.setStandardButtons(QMessageBox::Ok);
     msgBox.exec();
@@ -233,6 +240,7 @@ void PopUpWindow::OpenHelp()
 
 void PopUpWindow::CloseSave()
 {
+    QTextStream(stdout) << "Close Game Triggered\n";
     mSaveData.setLevel(mCurrentLevel);
     mSaveData.saveGame(Game::SaveFormat::Json);
     this->close();

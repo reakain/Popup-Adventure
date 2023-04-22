@@ -35,7 +35,7 @@ The "choices" item is a list of buttons to display in the textbox, and where the
  - Open
  - Save
  - Cancel
- - Close
+ - Close ----> Used for game save and close. It's present on all popups, but hidden to save some space/clutter.
  - Discard
  - Apply
  - Reset
@@ -53,8 +53,7 @@ The "choices" item is a list of buttons to display in the textbox, and where the
 
 ## ToDo:
  - Write the actual story, I guess lolol. Might write it in yarn and then port it to our json.
- - Figure out how to make the popup box titles have the title text properly
- - Maybe remove the close button use and just use the top right x instead
+ - Maybe remove the close button use and just use the top right x instead --> This doesn't work right, if there's no close button, I can't press the x, but if there is, the x counts as another close button. Also I can't get it to let me hide the close button >.>
  - Some sort of visual story builder tool or conversion system from twine
 
 
