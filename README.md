@@ -55,6 +55,7 @@ The "choices" item is a list of buttons to display in the textbox, and where the
  - We have a test story! Now to make the [Goncharov](https://en.wikipedia.org/wiki/Goncharov_(meme)) story
  - Maybe remove the close button use and just use the top right x instead --> This doesn't work right, if there's no close button, I can't press the x, but if there is, the x counts as another close button. Also I can't get it to let me hide the close button >.>
  - Release builds don't run for some reason?
+ - Maybe add a way to pick from a list of story json files? (And keep saves for them)
  - Some sort of visual story builder tool or conversion system from twine/yarn
 
 
