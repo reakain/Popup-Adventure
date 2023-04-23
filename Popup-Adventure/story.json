@@ -107,18 +107,6 @@
         ]
     },
     {
-        "name": "bleh",
-        "title": "bleh",
-        "body": "bleh",
-        "icon": 0,
-        "choices": [
-        {
-            "goto": "bleh",
-            "type": "Ok"
-        }
-        ]
-    },
-    {
         "name": "Credits",
         "title": "Credits",
         "body": "Made by Reakain, with help from Blink The Things.",
