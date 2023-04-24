@@ -3,8 +3,8 @@
     "levels": [
         {
             "name": "Title",
-            "title": "Pop Up Adventure!",
-            "body": "An exciting story told through system popup messages!",
+            "title": "Goncharov",
+            "body": "A story of intrigue and betrayal, based on the hit 1973 film by Martin Scorsese, Goncharov.",
             "icon": 3,
             "choices": [
             {
@@ -27,14 +27,14 @@
         },
         {
             "name": "Help",
-            "title": "About Pop Up Adventure",
-            "body": "Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!",
-            "icon": 1
+            "title": "About Goncharov",
+            "body": "A story of intrigue and betrayal, based on the hit 1973 film by Martin Scorsese, Goncharov, and delivered through the wildly popular modality of popup messages!",
+            "icon": 4
         },
     {
         "name": "Start",
-        "title": "Warning",
-        "body": "Your computer has encountered an error. Running checks to determine source...",
+        "title": "A Cold Day",
+        "body": "Blep",
         "icon": 2,
         "choices": [
         {
