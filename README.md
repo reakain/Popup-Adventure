@@ -65,3 +65,4 @@ The "choices" item is a list of buttons to display in the textbox, and where the
 ## References
 1. [Powershell functions](https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/09-functions?view=powershell-7.3)
 2. [QT Save Game Json Example](https://doc.qt.io/qt-6/qtcore-serialization-savegame-example.html)
+3. [QtNodeEditorBuilder](https://github.com/paceholder/nodeeditor)
