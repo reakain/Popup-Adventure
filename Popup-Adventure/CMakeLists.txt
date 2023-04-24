@@ -38,6 +38,7 @@ set(PROJECT_SOURCES
         game.h game.cpp
         player.h player.cpp
         story.h story.cpp
+        storysave.h storysave.cpp
         ${TS_FILES}
 )
 

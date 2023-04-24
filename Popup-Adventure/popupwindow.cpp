@@ -105,13 +105,21 @@ QMessageBox::StandardButtons PopUpWindow::CheckSpecialCaseButtons()
         // Then let's load our save data
         if(mSaveData.loadGame(Game::SaveFormat::Json))
         {
+            StorySave newSave;
+            if(mSaveData.getGameSave(newSave, mGameData.title()))
+            {
             // Then we had save data, so let's offer to continue
             //mGameData.getLevelWithName()
             QList<Choice> choices = mCurrentLevel.choices();
             //choices.add(Choice("Start", QMessageBox::Yes));
-            choices.append(Choice(mSaveData.currentLevel().name(), QMessageBox::No));
+            choices.append(Choice(newSave.currentLevel(), QMessageBox::No));
             mCurrentLevel.setChoices(choices);
             return QMessageBox::Yes | QMessageBox::No | QMessageBox::Close | QMessageBox::Help;
+            }
+            else
+            {
+                return QMessageBox::Yes | QMessageBox::Close | QMessageBox::Help;
+            }
         }
         else
         {
@@ -314,7 +322,8 @@ void PopUpWindow::OpenHelp()
 void PopUpWindow::CloseSave()
 {
     QTextStream(stdout) << "Close Game Triggered\n";
-    mSaveData.setLevel(mCurrentLevel);
+    mSaveData.updateSave(mGameData.title(), mCurrentLevel.name());
+    //mSaveData.setLevel(mCurrentLevel);
     mSaveData.saveGame(Game::SaveFormat::Json);
     this->close();
 }

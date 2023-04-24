@@ -8,6 +8,7 @@
 #include "game.h"
 #include "choice.h"
 #include "story.h"
+#include "storysave.h"
 
 class PopUpWindow : public QMainWindow
 {
