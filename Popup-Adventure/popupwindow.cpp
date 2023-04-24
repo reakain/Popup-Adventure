@@ -2,26 +2,99 @@
 
 PopUpWindow::PopUpWindow(QWidget *parent) : QMainWindow(parent)
 {
-    /*
-     * Let's first see if there's save data to load, and load out whole ass logic tree script
-     *
-     */
-    // Let's load up our actual narrative
-    if(!mGameData.loadStory("story.json")) {
-        // Quit game
-        this->close();
-    }
-    mGameData.getLevelWithName("Help", mHelp);
+
+
+
 
     //mGameData.getLevelWithName("Title", mCurrentLevel);
     //OpenCurrentLevel();
 
 }
 
+
+int PopUpWindow::FindStoryFiles(QList<Story> &stories)
+{
+    QDir dir;
+       dir.setFilter(QDir::Files | QDir::Readable | QDir::NoSymLinks);
+       dir.setSorting(QDir::Name);
+       dir.setNameFilters(QStringList()<<"story_*.json");
+
+       QStringList fileList = dir.entryList();
+       for(int i=0; i < fileList.size(); i++)
+       {
+           stories.append(Story());
+           if(!stories[stories.count()-1].loadStory(fileList[i]))
+           {
+               stories.removeLast();
+           }
+       }
+       return stories.size();
+}
+
 void PopUpWindow::show()
 {
-    mGameData.getLevelWithName("Title", mCurrentLevel);
-    OpenCurrentLevel();
+    /*
+     * Let's first see if there's save data to load, and load out whole ass logic tree script
+     *
+     */
+    // Let's look for story files
+    QList<Story> stories;
+    int ret = FindStoryFiles(stories);
+    if(ret == 0) {
+        // No stories loaded, close
+        this->close();
+        return;
+    }
+    else if(ret == 1) {
+        // Only one story loaded, make that our story and run it
+        mGameData = stories[0];
+        mGameData.getLevelWithName("Help", mHelp);
+        mGameData.getLevelWithName("Title", mCurrentLevel);
+        OpenCurrentLevel();
+    }
+    else
+    {
+        // Multiple stories found, so we need to have the user pick one.
+        int story_ret = QMessageBox::No;
+        int i = 0;
+        //for(int i = 0; i < ret; i++)
+        while(story_ret == QMessageBox::No)
+        {
+            QMessageBox msgBox;
+            msgBox.setWindowTitle(stories[i].title());
+            QString bodyText = "Would you like to play ";
+            bodyText.append(stories[i].title());
+            bodyText.append("?");
+            msgBox.setText(bodyText);
+            msgBox.setIcon(QMessageBox::Question);
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Close);
+            story_ret = msgBox.exec();
+            if(story_ret == QMessageBox::Yes)
+            {
+                mGameData = stories[i];
+                mGameData.getLevelWithName("Help", mHelp);
+                mGameData.getLevelWithName("Title", mCurrentLevel);
+                OpenCurrentLevel();
+            }
+            else if(story_ret == QMessageBox::Close)
+            {
+                this->close();
+                return;
+            }
+            else
+            {
+                i++;
+                if( i >= ret)
+                {
+                    i = 0;
+                }
+            }
+        }
+
+    }
+    // Let's load up our actual narrative
+
+
 }
 
 QMessageBox::StandardButtons PopUpWindow::CheckSpecialCaseButtons()

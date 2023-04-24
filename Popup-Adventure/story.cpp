@@ -1,6 +1,9 @@
 #include "story.h"
 
-
+QString Story::title() const
+{
+    return mTitle;
+}
 
 QList<Level> Story::levels() const
 {
@@ -51,6 +54,9 @@ bool Story::loadStory(QString fileName)
 // Reading from json
 void Story::read(const QJsonObject &json)
 {
+    if (json.contains("title") && json["title"].isString()) {
+        mTitle = json["title"].toString();
+    }
     if (json.contains("levels") && json["levels"].isArray()) {
         QJsonArray levelArray = json["levels"].toArray();
         mLevels.clear();

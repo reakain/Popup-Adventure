@@ -41,7 +41,8 @@ set(PROJECT_SOURCES
         ${TS_FILES}
 )
 
-configure_file(story.json ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file(story_short.json ${CMAKE_BINARY_DIR} COPYONLY)
+configure_file(story_goncharov.json ${CMAKE_BINARY_DIR} COPYONLY)
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Popup-Adventure

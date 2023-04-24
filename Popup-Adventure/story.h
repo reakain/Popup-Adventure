@@ -24,6 +24,7 @@ public:
     //Story() = default;
     //explicit Story(QString fileName = "story.json");
 
+    QString title() const;
     QList<Level> levels() const;
     void setLevels(const QList<Level> &levels);
 
@@ -36,6 +37,7 @@ public:
     //void write(QJsonObject &json) const;
 
 private:
+    QString mTitle;
     QList<Level> mLevels;
 };
 

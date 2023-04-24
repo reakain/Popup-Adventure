@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QDir>
 #include "level.h"
 #include "game.h"
 #include "choice.h"
@@ -20,6 +21,7 @@ public:
     void CloseSave();
     void show();
     QMessageBox::StandardButtons CheckSpecialCaseButtons();
+    int FindStoryFiles(QList<Story> &stories);
 
 //signals:
 

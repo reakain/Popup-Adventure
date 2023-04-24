@@ -1,0 +1,138 @@
+{
+    "title": "Pop Up Adevnture!",
+    "levels": [
+        {
+            "name": "Title",
+            "title": "Pop Up Adventure!",
+            "body": "An exciting story told through system popup messages!",
+            "icon": 3,
+            "choices": [
+            {
+                "goto": "NewGame",
+                "type": "Ok"
+            }
+            ]
+        },
+        {
+            "name": "NewGame",
+            "title": "New Game or Continue",
+            "body": "Would you like to start a new game?",
+            "icon": 1,
+            "choices": [
+            {
+                "goto": "Start",
+                "type": "Yes"
+            }
+            ]
+        },
+        {
+            "name": "Help",
+            "title": "About Pop Up Adventure",
+            "body": "Popup Adventure is a text adventure game, delivered through the wildly popular modality of popup messages!",
+            "icon": 1
+        },
+    {
+        "name": "Start",
+        "title": "Warning",
+        "body": "Your computer has encountered an error. Running checks to determine source...",
+        "icon": 2,
+        "choices": [
+        {
+            "goto": "Start0",
+            "type": "Ok"
+        }
+        ]
+    },
+    {
+        "name": "Start0",
+        "title": "Warning",
+        "body": "Your computer is sad and tired. It feels unappreciated.",
+        "icon": 2,
+        "choices": [
+        {
+            "goto": "Appreciate0",
+            "type": "Ok"
+        }
+        ]
+    },
+    {
+        "name": "Appreciate0",
+        "title": "Do you love me?",
+        "body": "Do you appreciate your computer?",
+        "icon": 1,
+        "choices": [
+        {
+            "goto": "AppreciateYes",
+            "type": "Yes"
+        },
+        {
+            "goto": "AppreciateNo",
+            "type": "No"
+        }
+        ]
+    },
+    {
+        "name": "AppreciateYes",
+        "title": "Care",
+        "body": "That's definitely helps it feel better. You should give it some TLC from time to time, y'know? It works hard for you.",
+        "icon": 0,
+        "choices": [
+        {
+            "goto": "Credits",
+            "type": "Ok"
+        }
+        ]
+    },
+    {
+        "name": "AppreciateNo",
+        "title": "Wow",
+        "body": "Wow. Do you even know how hard it works for you?",
+        "icon": 1,
+        "choices": [
+        {
+            "goto": "AppreciateNo1",
+            "type": "No"
+        }
+        ]
+    },
+    {
+        "name": "AppreciateNo1",
+        "title": "Jerk",
+        "body": "You're really insensitive.",
+        "icon": 3,
+        "choices": [
+        {
+            "goto": "AppreciateNo1",
+            "type": "No"
+        }
+        ]
+    },
+    {
+        "name": "Credits",
+        "title": "Credits",
+        "body": "Made by Reakain, with help from Blink The Things.",
+        "icon": 1,
+        "choices": [
+            {"goto": "Credits1",
+        "type": "Ok"}
+        ]
+    },
+    {
+        "name": "Credits1",
+        "title": "Credits",
+        "body": "Made with Qt! Source code available at https://github.com/reakain/Popup-Adventure.",
+        "icon": 2,
+        "choices": [
+            {"goto": "Credits2",
+        "type": "Ok"}
+        ]
+    },
+    {
+        "name": "Credits2",
+        "title": "Credits",
+        "body": "Thank you for playing!",
+        "icon": 3,
+        "choices": []
+    }
+    ]
+}
