@@ -11,6 +11,23 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set path to our custom CMAKE scripts
+#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+
+
+
+
+
+
+# Include Qt deployment helper function
+#include("windeployqt.cmake")
+
+#include("windeploymacro.cmake")
+
+#message("let's set our debug or release?")
+#set_debug_or_release_variable()
+#message(STATUS ----DEBUG_OR_RELEASE_LOWER_CASE " " ${DEBUG_OR_RELEASE_LOWER_CASE}-----)
+
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package( ...) calls below.
@@ -66,7 +83,10 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(Popup-Adventure PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Popup-Adventure PRIVATE
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Widgets
+)
 
 set_target_properties(Popup-Adventure PROPERTIES
     WIN32_EXECUTABLE ON
@@ -81,3 +101,31 @@ if(QT_VERSION_MAJOR EQUAL 6)
 endif()
 
 include("packaging.cmake")
+
+get_target_property(_qmake_executable Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E echo
+                    "winddep file = ${_qt_bin_dir}/windeployqt.exe")
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E echo
+                    "target dir = $<TARGET_FILE:${PROJECT_NAME}>")
+
+
+add_custom_command(TARGET ${PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${_qt_bin_dir}/windeployqt.exe
+    $<TARGET_FILE:${PROJECT_NAME}>)
+
+#add_custom_command(Popup-Adventure
+#    POST_BUILD
+#    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/performCrc32.py
+#    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+#    COMMENT "Running CRC32 check..."
+#)
+
+# Copy Qt dependencies to output folder
+#set_target_deploy_qt(${PROJECT_NAME} ${DEBUG_OR_RELEASE_LOWER_CASE})
+
+#windeployqt("Popup-Adventure")
