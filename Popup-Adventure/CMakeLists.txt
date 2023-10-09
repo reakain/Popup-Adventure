@@ -102,21 +102,21 @@ endif()
 
 include("packaging.cmake")
 
-get_target_property(_qmake_executable Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
-get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E echo
-                    "winddep file = ${_qt_bin_dir}/windeployqt.exe")
+#get_target_property(_qmake_executable Qt${QT_VERSION_MAJOR}::qmake IMPORTED_LOCATION)
+#get_filename_component(_qt_bin_dir "${_qmake_executable}" DIRECTORY)
+#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E echo
+#                    "winddep file = ${_qt_bin_dir}/windeployqt.exe")
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E echo
-                    "target dir = $<TARGET_FILE:${PROJECT_NAME}>")
+#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+#    COMMAND ${CMAKE_COMMAND} -E echo
+#                    "target dir = $<TARGET_FILE:${PROJECT_NAME}>")
 
 
-add_custom_command(TARGET ${PROJECT_NAME}
-    POST_BUILD
-    COMMAND ${_qt_bin_dir}/windeployqt.exe
-    $<TARGET_FILE:${PROJECT_NAME}>)
+#add_custom_command(TARGET ${PROJECT_NAME}
+#    POST_BUILD
+#    COMMAND ${_qt_bin_dir}/windeployqt.exe
+#    $<TARGET_FILE:${PROJECT_NAME}>)
 
 #add_custom_command(Popup-Adventure
 #    POST_BUILD
