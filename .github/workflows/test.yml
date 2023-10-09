@@ -6,7 +6,7 @@ env:
   QT_VERSION:     "6.4.3"
   MINGW_VERSION:  "win64_mingw"
   # MINGW_PATH:     "mingw1120_64"
-    MINGW_PATH:     "mingw_64"
+  MINGW_PATH:     "mingw_64"
   BUILD_TYPE:      Release
 
 jobs:
