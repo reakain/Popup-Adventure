@@ -11,29 +11,15 @@ env:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     -
       uses: actions/checkout@v3
     -
-      name: Check mingw g++ version
-      run: |
-        Write-Output (Get-Command g++.exe).Path
-        g++.exe --version
-    # -
-    #   name: Install correct version of mingw
-    #   uses: crazy-max/ghaction-chocolatey@v1
-    #   with:
-    #     args: install mingw --version=11.2.0  -y --allow-downgrade
-    -
-      name: Check mingw directory
-      run: |
-        ls C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
-    -
       name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        host: windows
+        host: linux
         target: "desktop"
         version: ${{ env.QT_VERSION }}
         arch: ${{ env.MINGW_VERSION }}
@@ -88,12 +74,12 @@ jobs:
         windeployqt.exe Popup-Adventure.exe
         echo "Finished windeployqt"
         ls
-        Compress-Archive -Path ${{github.workspace}}\build\Popup-Adventure\ -DestinationPath ${{github.workspace}}\PopupAdventureWindows.zip
+        Compress-Archive -Path ${{github.workspace}}\build\Popup-Adventure\ -DestinationPath ${{github.workspace}}\PopupAdventureLinux.zip
     -
       name: Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-        files: PopupAdventureWindows.zip
+        files: PopupAdventureLinux.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
