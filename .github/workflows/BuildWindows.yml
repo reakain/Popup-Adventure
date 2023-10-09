@@ -88,6 +88,8 @@ jobs:
         echo "Finished windeployqt"
         ls
         Compress-Archive -Path ${{github.workspace}}\build\all\ -DestinationPath ${{github.workspace}}\build\PopupAdventureWindows.zip
+        cd ${{github.workspace}}\build\
+        ls
     -
       name: Release
       uses: softprops/action-gh-release@v1
