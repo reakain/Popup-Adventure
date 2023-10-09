@@ -82,8 +82,10 @@ jobs:
       run: |
         mkdir ${{github.workspace}}\build\all\
         cp ${{github.workspace}}/build/Popup-Adventure.exe ${{github.workspace}}\build\all\
+        cp ${{github.workspace}}/build/*.json ${{github.workspace}}\build\all\
         cd ${{github.workspace}}\build\all\
         windeployqt.exe Popup-Adventure.exe --release
+        echo "Finished windeployqt"
         ls
         Compress-Archive -Path ${{github.workspace}}\build\all\ -DestinationPath ${{github.workspace}}\build\final.zip
     -
