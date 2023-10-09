@@ -1,6 +1,9 @@
-name: Compile and Release Qt6 Project
+name: Compile and Release Qt6 Windows Project
 
-on: push
+on:
+  push:
+    tags:
+      - "v*.*.*"
 
 env:
   QT_VERSION:     "6.4.3"
