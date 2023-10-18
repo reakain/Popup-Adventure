@@ -28,10 +28,10 @@ jobs:
     #   uses: crazy-max/ghaction-chocolatey@v1
     #   with:
     #     args: install mingw --version=11.2.0  -y --allow-downgrade
-    -
-      name: Check mingw directory
-      run: |
-        ls C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
+    # -
+    #   name: Check mingw directory
+    #   run: |
+    #     ls C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw64\bin
     -
       name: Install Qt
       uses: jurplel/install-qt-action@v3
