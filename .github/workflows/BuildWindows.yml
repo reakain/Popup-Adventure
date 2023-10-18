@@ -93,10 +93,10 @@ jobs:
         ls
         Compress-Archive -Path ${{github.workspace}}\build\Popup-Adventure\ -DestinationPath ${{github.workspace}}\PopupAdventureWindows.zip
     -
-      name: Release
-      uses: softprops/action-gh-release@v1
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        files: PopupAdventureWindows.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # name: Release
+      # uses: softprops/action-gh-release@v1
+      # if: startsWith(github.ref, 'refs/tags/')
+      # with:
+      #   files: PopupAdventureWindows.zip
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
