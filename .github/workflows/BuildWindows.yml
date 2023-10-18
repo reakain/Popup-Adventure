@@ -85,18 +85,21 @@ jobs:
       run: |
         mkdir ${{github.workspace}}\build\Popup-Adventure\
         cp ${{github.workspace}}/build/Popup-Adventure.exe ${{github.workspace}}\build\Popup-Adventure\
-        cp ${{github.workspace}}/build/*.json ${{github.workspace}}\build\Popup-Adventure\
         cp ${{github.workspace}}/build/*.dll ${{github.workspace}}\build\Popup-Adventure\
+        cp ${{github.workspace}}/build/Stories ${{github.workspace}}\build\Popup-Adventure\Stories\
+        cp ${{github.workspace}}/build/platforms ${{github.workspace}}\build\Popup-Adventure\platforms\
+        cp ${{github.workspace}}/README.md ${{github.workspace}}\build\Popup-Adventure\
+        cp ${{github.workspace}}/story_template.json ${{github.workspace}}\build\Popup-Adventure\
         cd ${{github.workspace}}\build\Popup-Adventure\
         windeployqt.exe Popup-Adventure.exe
         echo "Finished windeployqt"
         ls
         Compress-Archive -Path ${{github.workspace}}\build\Popup-Adventure\ -DestinationPath ${{github.workspace}}\PopupAdventureWindows.zip
     -
-      # name: Release
-      # uses: softprops/action-gh-release@v1
-      # if: startsWith(github.ref, 'refs/tags/')
-      # with:
-      #   files: PopupAdventureWindows.zip
-      # env:
-      #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
+      with:
+        files: PopupAdventureWindows.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
