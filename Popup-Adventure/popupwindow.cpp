@@ -14,16 +14,16 @@ PopUpWindow::PopUpWindow(QWidget *parent) : QMainWindow(parent)
 
 int PopUpWindow::FindStoryFiles(QList<Story> &stories)
 {
-    QDir dir;
+    QDir dir(QDir::currentPath() + "/Stories");
        dir.setFilter(QDir::Files | QDir::Readable | QDir::NoSymLinks);
        dir.setSorting(QDir::Name);
-       dir.setNameFilters(QStringList()<<"story_*.json");
+       dir.setNameFilters(QStringList()<<"*.json");
 
        QStringList fileList = dir.entryList();
        for(int i=0; i < fileList.size(); i++)
        {
            stories.append(Story());
-           if(!stories[stories.count()-1].loadStory(fileList[i]))
+           if(!stories[stories.count()-1].loadStory(dir.absoluteFilePath(fileList[i])))
            {
                stories.removeLast();
            }
@@ -42,6 +42,14 @@ void PopUpWindow::show()
     int ret = FindStoryFiles(stories);
     if(ret == 0) {
         // No stories loaded, close
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("No stories");
+        QString bodyText = "No stories found! Please add story files to the Stories folder to play a game.\nStory directory:\n";
+        bodyText.append(QDir::currentPath() + + "/Stories");
+        msgBox.setText(bodyText);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.exec();
         this->close();
         return;
     }
@@ -157,10 +165,12 @@ void PopUpWindow::OpenCurrentLevel()
     msgBox.setText(mCurrentLevel.bodyText());
     msgBox.setIcon(mCurrentLevel.icon());
     msgBox.setStandardButtons(CheckSpecialCaseButtons());
+    msgBox.setEscapeButton(QMessageBox::Close);
+    //msgBox.escapeButton()->hide();
     // Qt auto links the esc/x button to the appropriate reject mode button like close or cancel
     // If we don't provide a close/cancel button, then the x is disabled >.>
     // We tried to just hide our close button, but Qt no longer likes that, for some reason
-    QAbstractButton *pCloseBtn = msgBox.button(QMessageBox::Close);
+    //QAbstractButton *pCloseBtn = msgBox.button(QMessageBox::Close);
     //pCloseBtn->hide();
     //QPushButton *pCloseBtn = msgBox.addButton(QMessageBox::Close);
     //pCloseBtn->setVisible(false);
