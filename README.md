@@ -1,18 +1,10 @@
 # Popup Adventure
 There is nothing of value here
 
-
-## Text Adventure Through Windows Popup Message Boxes
-Preferably calling the popups through powershell, but I guess I could make it another way so you can have terrible popups cross platform. If we're doing cross platform, Qt is probably the right answer.
-
-Correct answer: We're using QT to generate the popups, based on the narrative structure defined in ```story.json```. The current position in the narrative will eventually be saved in a ```save.json``` file, but we're not there yet.  
-
-## CMake changes to copy files to output directory
-Loosely based on [this](https://stackoverflow.com/questions/34799916/copy-file-from-source-directory-to-binary-directory-using-cmake) and implemented by [BlinkTheThings](https://github.com/BlinkTheThings). Removed the ```story.json``` file from the source files, and added commanded ```configure_file(story.json ${CMAKE_BINARY_DIR} COPYONLY)``` 
-
+We're using QT to generate the popups, based on the narrative structure defined in ```story_template.json```. The current position in the narrative is saved in a ```save.json``` file.  
 
 ## Narrative Json File Structure
-The story file must have the name convention ```story_*.json``` where the * is replaced with the specific name of your choice.
+The story files are json files, and must be placed in the ```Stories``` directory with the program.
 
 The json file contents hav a "title" item which is the game title, and a list of "level" items, which denote each popup. The "name" item for each level is used as a reference for button linking, with certain names being expected to be present. 
 
@@ -37,7 +29,7 @@ The "choices" item is a list of buttons to display in the textbox, and where the
  - Open
  - Save
  - Cancel
- - Close ----> Used for game save and close. It's present on all popups, but hidden to save some space/clutter.
+ - Close ----> Used for game save and close. It's present on all popups, and also linked to the escape button.
  - Discard
  - Apply
  - Reset
@@ -54,12 +46,11 @@ The "choices" item is a list of buttons to display in the textbox, and where the
  - NoButton
 
 ## ToDo:
+ - Get Linux and Mac builds working correctly. 
+ - Have everything port to a clean folder setup for distribution.
  - We have a test story! Now to make the [Goncharov](https://en.wikipedia.org/wiki/Goncharov_(meme)) story
  - Maybe remove the close button use and just use the top right x instead --> This doesn't work right, if there's no close button, I can't press the x, but if there is, the x counts as another close button. Also I can't get it to let me hide the close button >.>
- - Release builds don't run for some reason?
  - Some sort of visual story builder tool or conversion system from twine/yarn
-
-
 
 
 ## References
